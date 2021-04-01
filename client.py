@@ -29,11 +29,8 @@ def receving (name, sock):
 						decrypt += i
 					else:
 						decrypt += chr(ord(i)^key)
-				if len(decrypt) <= 1000:
-					print(decrypt)
-				else:
-					open("file.jpg", 'wb').write(decrypt)
-					print("Файл получен")
+				print(decrypt)
+				
 				# End
 
 				time.sleep(0.2)
@@ -71,12 +68,11 @@ while shutdown == False:
 			# End
 
 			if message != "":
-				if len(message) <= 1000:
-					s.sendto(("["+alias + "] :: "+message).encode("utf-8"),server)
-				else:
-					s.sendto(("["+alias + "] :: ОТПРАВИЛ ФАЙЛ").encode("utf-8"),server)
-					s.sendto((message).encode("utf-8"),server)
+				s.sendto(("["+alias + "] :: "+message).encode("utf-8"),server)
+				
+				s.sendto((message).encode("utf-8"),server)
 			time.sleep(0.2)
+		
 		except:
 			s.sendto(("["+alias + "] <= отключился ").encode("utf-8"),server)
 			shutdown = True
